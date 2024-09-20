@@ -32,7 +32,7 @@ while sel!=3:
                 print("2.Consultar paciente")
                 print("3.Ver pacientes")
                 print("4.Editar datos de paciente")
-                print("5.Salir") 
+                print("5.Volver al menu anterior") 
                 
                 print(f'{enter}Seleccione una opcion{enter}')
                 sel2=int(input())                
@@ -259,6 +259,8 @@ Seleccione una opción: """))
                                                 regm="Subsidiado"
                                         else: 
                                             print("Digite una opción valida")
+                    case _:
+                        pass
                                 
         case 2:
             while selh!=3:
@@ -427,3 +429,5 @@ Digite una opción: """))
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
+        case _:
+            break
