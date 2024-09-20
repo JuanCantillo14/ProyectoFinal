@@ -1,0 +1,5 @@
+Juan,Cantillo,Masculino,A+,canti@gmail.com,3022563636,Cedula de Ciudadania,1000604018,14/09/2002,Migrantes,Programador,Sura,Contributivo
+Eddy,Gonzales,Masculino,A+,eddy@gmail.com,3005678909,Cedula de Ciudadania,12345,22,Ninguna,Soltero,Sura,Contributivo
+dss,sd,Femenino,A+,cc,1234567890,Cedula de Ciudadania,12345678999,6,Migrantes,soldado,dd,Contributivo
+s,d,Masculino,A-,3,1234567890,Cedula de Ciudadania,1,2,Migrantes,3,3,Subsidiado
+3,4,Masculino,A+,22,2345678900,Cedula de Extranjeria,2,3,Migrantes,3,3,Subsidiado
