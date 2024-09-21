@@ -16,11 +16,13 @@ selpob=0
 selreg=0
 selh=0
 selh2=0
-while sel!=3:
+selh3=0
+while sel!=4:
     print(f""">>>BIEVENIDO<<<""")
-    print("1.Pacientes")
-    print("2.Historia Clinica")
-    print("3.Salir")
+    print("1. Pacientes")
+    print("2. Historias Clinicas")
+    print("3. Talento Humano")
+    print("4.Salir")
     print(f'{enter}Seleccione una opción{enter}')
     sel=int(input())
     match sel:
@@ -196,32 +198,33 @@ Seleccione una opción: """))
                         with open ("pacientes.json","w") as p:
                             json.dump(x,p)
                             
-                        pac.insert_one(x)
+                        with open ("pacientes.json") as f:
+                            data=json.load(f)
+                            
+                            
+                        pac.insert_one(data)
                             
                     case 2:
-                        id=input("Digite el numero de documento: ")
+                        id=int(input("Digite el numero de documento: "))
                         
-                        with open('pacientes.json','r')as p:
-                            pacs=p.readlines()
+                        cursor=pac.find({"Nro Documento":id},{'Nombre':1,'Apellidos':1,'Sexo':1,'RH':1,'Correo':1,'Telefono':1,'Fecha de Nacimiento':1,'Tipo Población':1,'Ocupación':1,'EPS':1,'Regimen':1})
+                    
+                        # print("..........",cursor)
+                        
+                        for detalle in cursor:
                             
-                            for linea in pacs:
-                                if id in linea:
-                                    pacs=linea.split(",")
-                                    n=pacs[0]
-                                    a=pacs[1]
-                                    g=pacs[2]
-                                    rh=pacs[3]
-                                    correo=pacs[4]
-                                    telefono=pacs[5]
-                                    tipodoc=pacs[6]
-                                    fecha_nacimiento=pacs[8]
-                                    tipo_poblacion=pacs[9]
-                                    ocupacion=pacs[10]
-                                    eps=pacs[11]
-                                    regimen=pacs[12]
-                                    
-                                    
-                                    print(f"Nombres:{n}\nApellidos:{a}\nGenero:{g}\nRH:{rh}\nCorreo:{correo}\nTelefono:{telefono}\nTipo Documento:{tipodoc}\nFecha Nacimiento:{fecha_nacimiento}\nTipo Poblacion:{tipo_poblacion}\nOcupacion:{ocupacion}\nEPS:{eps}\nRegimen:{regimen}")
+                            print(f'Nombre: {detalle["Nombre"]}')
+                            print(f'Apellidos: {detalle["Apellidos"]}')
+                            print(f'Genero: {detalle["Sexo"]}')
+                            print(f'RH: {detalle["RH"]}')
+                            print(f'Correo: {detalle["Correo"]}')
+                            print(f'Telefono: {detalle["Telefono"]}')
+                            print(f'Fecha de Nacimiento: {detalle["Fecha de Nacimiento"]}')
+                            print(f'Tipo de Población: {detalle["Tipo Población"]}')
+                            print(f'Ocupacion: {detalle["Ocupación"]}')
+                            print(f'EPS: {detalle["EPS"]}')
+                            print(f'Regimen: {detalle["Regimen"]}')
+
                                     
                     case 3:  
                         
@@ -429,5 +432,20 @@ Digite una opción: """))
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
+<<<<<<< HEAD
         case _:
             break
+=======
+        case 3: 
+            while selh3!=3:
+                selh4=0
+                print(">>>MENÚ DE TALENTO HUMANO<<<")
+                print("1. ")
+                print("2.Consultar datos")
+                print("3.Salir")
+                print(f'{enter}Seleccione una opción{enter}')
+                selh4=int(input())
+                match selh4:
+                    case 1: 
+                        pass
+>>>>>>> origin
