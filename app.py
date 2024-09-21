@@ -436,11 +436,63 @@ Digite una opción: """))
             while selh3!=3:
                 selh4=0
                 print(">>>MENÚ DE TALENTO HUMANO<<<")
-                print("1. ")
-                print("2.Consultar datos")
-                print("3.Salir")
+                print("1.Ver empleados")
+                print("2.Consultar datos ")
+                print("3.Registrar nuevo empleado")
+                print("4.Actualizar datos de un empleado")
+                print("5.Registrar experiencia laboral")
+                print("6.Registrar estudios academicos")
+                print("7.Eliminar un empleado")
+                print("8.Salir")
                 print(f'{enter}Seleccione una opción{enter}')
                 selh4=int(input())
                 match selh4:
                     case 1: 
-                        pass
+                        print (">>>Lista de empleados<<<")
+                    
+                    
+                    case 2:
+                        print("Consultar datos de un empleado empleado Empleado ")
+                        nro_documento = input("Ingrese el documento del empleado")
+                        
+                        
+                    case 3:
+                        print ("Registro de un nuevo empleado")
+                        cargo= input ("Digite el cargo que ocuara el empleado")
+                        nombre=input ("Digite los nombres de el empleado")
+                        apellido=input("Digite los apellidos de el empleado ")
+                        fecha_ing=input("Digite la fecha de ingreso de el empleado")
+                        salario=input("Digite el salario de el empleado")
+                        
+                        
+                    case 4:
+                        print ("Actualizar datos de un empleado")
+                        especialidad= input ("Digite la nueva especialidad que ocupara el empleado")
+                        celular=input("Digite el nuevo numero de contacto del empleado")
+                        salario=input("Digite el nuevo salario de el empleado")
+                        email=input("Digite el nuevo correo de el empleado")
+                        direccion=input("Digite la nueva direccion de el empleado ")
+                        
+                        
+                    case 5:
+                        print("Registrar experiencia laboral")
+                        nombre_empresa=input("Digite el nombre de la empresa")
+                        cargo=("Digite el cargo que ocupaba el empleado")
+                        fecha_inicial=input("Digite la fecha de inicio (dd/mm/aaaa)")
+                        fecha_final=input("Digite la fecha final (dd/mm/aaaa)")
+                    
+                    case 6:
+                        print("Registrar estudios academicos")
+                        titulo=input("Digite el titulo academico ")
+                        institucion=input("Digite la institucion")   
+                        fecha_culminado=input("Digite la fecha de culminacion (dd/mm/aaaa)")
+                        
+                    case 7:
+                        print ("Eliminar empleado")
+                        nro_documento=input("Dijite el documento de el empleado ")
+                    
+                    
+                    case 8:
+                        print("Cerrando menu")
+                        selh3 = 3  
+                        
