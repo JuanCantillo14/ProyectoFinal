@@ -432,10 +432,6 @@ Digite una opción: """))
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
-<<<<<<< HEAD
-        case _:
-            break
-=======
         case 3: 
             while selh3!=3:
                 selh4=0
@@ -448,4 +444,3 @@ Digite una opción: """))
                 match selh4:
                     case 1: 
                         pass
->>>>>>> origin
