@@ -264,7 +264,7 @@ Seleccione una opción: """))
                                 print("3. Consulta")
                                 print("4. Procemiento quirurgicos")
                                 print("5. Antecedentes personales")
-                                print("6.Prescripccion Medica")
+                                print("6. Prescripccion Medica")
                                 print("7. Partos")
                                 print("8. Volver al menú anterior")
                                 print(f'{enter}Seleccione una opción{enter}')
@@ -299,19 +299,22 @@ Digite una opción: """))
                                         evAd=input("Describa si ocurrio algun evento adverso al momento de aplicar la vacuna: ")
                                         interv=input("Digite el intervalo de aplicación de la vacuna: ")
                                         
-                                        #datosVac=Paciente.agregarVacuna(desc,dosis,num_vac,fecha_vac,ref,aplica,evAd,interv)
-                                        x={"Descripcion":desc,"Dosis":dosis,"Nro Vacunas":num_vac,"Fecha de la Vacuna":fecha_vac,"Refuerzos":ref,"Via de aplicacion":aplica,"Eventos adversos":evAd,"Intervalo":interv}
+                                        
+                                        x={"Nro Documento":idUsu,"Categoria":"vacunas","Descripcion":desc,"Dosis":dosis,"Nro Vacunas":num_vac,"Fecha de la Vacuna":fecha_vac,"Refuerzos":ref,"Via de aplicacion":aplica,"Eventos adversos":evAd,"Intervalo":interv}
 
-                                        with open("vacunas.json","a") as o:
-                                            o.write(x,o)
+                                        with open("vacunas.json","w") as o:
+                                            json.dump(x,o)
                                             
                                         with open ("vacunas.json") as f:
                                             data=json.load(f)
                             
                             
                                         pac.insert_one(data)
-                    
-
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
                                             
                                     case 2:
                                         print(">>>REGISTRO DATOS ANTROPOMETRICOS<<<")
@@ -324,11 +327,22 @@ Digite una opción: """))
                                         presion_A=float(input("Digite la presión arterial del paciente: "))
                                         
                                         
-                                        datosATP=Paciente.agregardatosATP(estatura,temperatura,peso,imc,pulso,frecuencia_R,presion_A)
-                                        x={"Estatura":estatura,"Temperatura":temperatura,"Peso":peso,"IMC":imc,"Pulso":pulso,"Frecuencia respiratoria":frecuencia_R,"Presión arterial":presion_A}             
                                         
-                                        with open("datosATP.json","w") as f:
-                                            f.write(x,f)
+                                        x={"Nro Documento":idUsu,"Categoria":"antropometricos","Estatura":estatura,"Temperatura":temperatura,"Peso":peso,"IMC":imc,"Pulso":pulso,"Frecuencia respiratoria":frecuencia_R,"Presión arterial":presion_A}             
+                                        
+                                        with open("antropometricos.json","w") as o:
+                                            json.dump(x,o)
+                                            
+                                        with open ("antropometricos.json") as f:
+                                            data=json.load(f)
+                            
+                            
+                                        pac.insert_one(data)
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
                                         
                                     case 3:
                                         print(">>>REGISTRO DATOS DE CONSULTA<<<")
@@ -341,12 +355,25 @@ Digite una opción: """))
                                         parentesco_acomp=input("Escriba que parentesco tiene el acompañante: ")
                                         conclusion=input("Escriba la conclusion de la consulta: ")
                                         
-                                        datosCons=Paciente.agregarConsulta(descripcion,motivo,diagnostico,planterapia,epicrisis,nombre_acomp,parentesco_acomp,conclusion)
                                         
-                                        x={"Descripción":descripcion,"Motivo de consulta":motivo,"Diagnostico":diagnostico,"Plan de terapia":planterapia,"Epicrisis":epicrisis,"Nombre del acompañante":nombre_acomp,"Parentesco del acompañante":parentesco_acomp,"Conclusiones":conclusion}
                                         
-                                        with open("datosConsulta.json","w") as o:
-                                            o.write(x,o)
+                                        x={"Nro Documento":idUsu,"Categoria":"consulta","Descripción":descripcion,"Motivo de consulta":motivo,"Diagnostico":diagnostico,"Plan de terapia":planterapia,"Epicrisis":epicrisis,"Nombre del acompañante":nombre_acomp,"Parentesco del acompañante":parentesco_acomp,"Conclusiones":conclusion}
+                                        
+                                        with open("consulta.json","w") as o:
+                                            json.dump(x,o)
+                                            
+                                        with open ("consulta.json") as f:
+                                            data=json.load(f)
+                            
+                            
+                                        pac.insert_one(data)
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
+                                    
+                                    
                                     case 4:
                                         print(">>>REGISTRO DE PROCESOS QUIRURGICOS<<<")
                                         descripcion=input("Escriba la descripcion del proceso: ")
@@ -354,10 +381,21 @@ Digite una opción: """))
                                         fecha_p=input("Digite la fecha del proceso en formato dd/mm/aaaa: ")
                                         lugar_p=input("Escriba en que lugar se realizo: ")
                                         
-                                        x={"Descripción del proceso":descripcion,"Anestesia":anesteseia,"Fecha del procedimiento":fecha_p,"Lugar del procedimiento":lugar_p}
+                                        x={"Nro Documento":idUsu,"Categoria":"quirurgicos","Descripción del proceso":descripcion,"Anestesia":anesteseia,"Fecha del procedimiento":fecha_p,"Lugar del procedimiento":lugar_p}
                                         
-                                        with open("datosProcQ.json","w") as o:
-                                            o.write(x,o)
+                                        with open("quirurgicos.json","w") as o:
+                                            json.dump(x,o)
+                                            
+                                        with open ("quirurgicos.json") as f:
+                                            data=json.load(f)
+                            
+                            
+                                        pac.insert_one(data)
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
                                         
                                     case 5:
                                         print(">>>REGISTRO DE ANTECEDENTES PERSONALES<<<")
@@ -369,10 +407,21 @@ Digite una opción: """))
                                         farmacologicos=input("Escriba los antecedentes farmacológicos: ")
                                         familiares=input("Escriba los antecedentes familiares: ")
                                         
-                                        x={"Antecedentes patológicos":patologicos,"Antecedentes quirúrgicos":quirurgicos,"Antecedentes alérgicos":alergicos,"Antecedentes ginecológicos":ginecologicos,"Antecedentes obstreticos":obstreticos,"Antecedentes farmacológicos":farmacologicos,"Antecedentes familiares":familiares}
+                                        x={"Nro Documento":idUsu,"Categoria":"antecedentes","Antecedentes patológicos":patologicos,"Antecedentes quirúrgicos":quirurgicos,"Antecedentes alérgicos":alergicos,"Antecedentes ginecológicos":ginecologicos,"Antecedentes obstreticos":obstreticos,"Antecedentes farmacológicos":farmacologicos,"Antecedentes familiares":familiares}
                                         
-                                        with open("datosAntecedentes.json","w") as o:
-                                            o.write(x,o)
+                                        with open("antecedentes.json","w") as o:
+                                            json.dump(x,o)
+                                            
+                                        with open ("antecedentes.json") as f:
+                                            data=json.load(f)
+                            
+                            
+                                        pac.insert_one(data)
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
                                         
                                     case 6:
                                         print(">>>REGISTRO DE PARTOS<<<")
@@ -388,10 +437,21 @@ Digite una opción: """))
                                         numFeto=1
                                         fetoCard=input("Digite la frecuencia cardiaca del feto: ")
                                         
-                                        x={"Fecha del parto":fecha_parto,"Hora del parto":hora_parto,"Frecuencia Cardiaca de la madre":frecCard,"Tensión arterial de la madre":tensArt,"Temperatura corporal de la madre":temp,"Frecuencia respiratoria de la madre":frecResp,"Glucemia de la madre":gluc,"Apariencia general de la madre":aspGen,"Tamaño del feto":tamFeto,"Numero de fetos":numFeto,"Fetocardia":fetoCard}
+                                        x={"Nro Documento":idUsu,"Categoria":"partos","Fecha del parto":fecha_parto,"Hora del parto":hora_parto,"Frecuencia Cardiaca de la madre":frecCard,"Tensión arterial de la madre":tensArt,"Temperatura corporal de la madre":temp,"Frecuencia respiratoria de la madre":frecResp,"Glucemia de la madre":gluc,"Apariencia general de la madre":aspGen,"Tamaño del feto":tamFeto,"Numero de fetos":numFeto,"Fetocardia":fetoCard}
                                         
-                                        with open("datosParto.json","w") as o:
-                                            o.write(x,o)
+                                        with open("partos.json","w") as o:
+                                            json.dump(x,o)
+                                            
+                                        with open ("partos.json") as f:
+                                            data=json.load(f)
+                            
+                            
+                                        pac.insert_one(data)
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
                                         
                                     case 7:
                                         print(">>>REGISTRO DE PRESCRIPCION MEDICA<<<")
@@ -403,10 +463,191 @@ Digite una opción: """))
                                         descr=input("Describa la vía de aplicación del medicamento por parte del paciente: ")
                                         cantTiempo=input("Digite el tiempo de uso del medicamento por parte del paciente: ")
                                         
-                                        x={"Fecha de la orden médica":fecha_presc,"Servicio asociado":serv,"Diagnóstico parcial":diagParcial,"Nombre del medicamento":nomMed,"Dosis del medicamento":doss,"Vía aplicación":descr,"Tiempo de uso":cantTiempo}
+                                        x={"Nro Documento":idUsu,"Categoria":"prescripcion","Fecha de la orden médica":fecha_presc,"Servicio asociado":serv,"Diagnóstico parcial":diagParcial,"Nombre del medicamento":nomMed,"Dosis del medicamento":doss,"Vía aplicación":descr,"Tiempo de uso":cantTiempo}
                                         
-                                        with open("datosPrescMedica.json","w") as o:
-                                            o.write(x,o)
+                                        with open("prescripcion.json","w") as o:
+                                            json.dump(x,o)
+                                            
+                                        with open ("prescripcion.json") as f:
+                                            data=json.load(f)
+                            
+                            
+                                        pac.insert_one(data)
+                                        
+        
+                                        print("------------Datos cargados exitosamente------------")
+                                        
+                                        break
+                                        
+                            else:
+                                print("Este número de documento no es válido")                      
+                                selh2=7
+                    case 2:
+                        while selh2!=8:
+                            
+                            idUsu=int(input("Digite su numero de documento: "))
+                            
+                            
+                            
+                                
+                            verificacion=pac.find_one({"Nro Documento":idUsu})
+                            
+                            #print(f"Resultado de la búsqueda: {verificacion}") #Esto es pa ver lo que bota el cursor (no activar, era prueba)
+                                
+                                
+                            if verificacion:
+                                print(">>>MENÚ DE DATOS<<<")
+                                print("1. Consultar Vacunas")
+                                print("2. Consultar Datos antropometricos")
+                                print("3. Consultas")
+                                print("4. Consultar Procemiento quirurgicos")
+                                print("5. Consultar Antecedentes personales")
+                                print("6. Consultar Prescripccion Medica")
+                                print("7. Consultar Partos")
+                                print("8. Volver al menú anterior")
+                                print(f'{enter}Seleccione una opción{enter}')
+                                selh2=int(input())
+                                    
+                                match selh2:
+                                    case 1:
+                                        print(">>>MENU DE VACUNACION<<<")
+                                                                
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"Vacunas"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Descripcion: {detalle["Descripcion"]}')
+                                            print(f'Dosis: {detalle["Dosis"]}')
+                                            print(f'Nro Vacunas: {detalle["Nro Vacunas"]}')
+                                            print(f'Fecha de la Vacuna: {detalle["Fecha de la Vacuna"]}')
+                                            print(f'Refuerzos: {detalle["Refuerzos"]}')
+                                            print(f'Via de aplicacion: {detalle["Via de aplicacion"]}')
+                                            print(f'Eventos adversos: {detalle["Eventos adversos"]}')
+                                            print(f'Intervalo: {detalle["Intervalo"]}')
+                                            
+                                            
+                                    case 2:
+                                        print(">>>REGISTRO DATOS ANTROPOMETRICOS<<<")
+                                        
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"antropometricos"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Estatura: {detalle["Estatura"]}')
+                                            print(f'Temperatura: {detalle["Temperatura"]}')
+                                            print(f'Peso: {detalle["Peso"]}')
+                                            print(f'IMC: {detalle["IMC"]}')
+                                            print(f'Pulso: {detalle["Pulso"]}')
+                                            print(f'Frecuencia respiratoria: {detalle["Frecuencia respiratoria"]}')
+                                            print(f'Presión arterial: {detalle["Presión arterial"]}')
+                                            
+                                        
+                                    case 3:
+                                        print(">>>REGISTRO DATOS DE CONSULTA<<<")
+                                        
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"consulta"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Descripción: {detalle["Descripción"]}')
+                                            print(f'Motivo de consulta: {detalle["Motivo de consulta"]}')
+                                            print(f'Diagnostico: {detalle["Diagnostico"]}')
+                                            print(f'Plan de terapia: {detalle["Plan de terapia"]}')
+                                            print(f'Epicrisis: {detalle["Epicrisis"]}')
+                                            print(f'Nombre del acompañante: {detalle["Nombre del acompañante"]}')
+                                            print(f'Parentesco del acompañante: {detalle["Parentesco del acompañante"]}')
+                                            print(f'Conclusiones: {detalle["Conclusiones"]}')
+                                            
+                                    
+                                    case 4:
+                                        print(">>>REGISTRO DE PROCESOS QUIRURGICOS<<<")
+                                        
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"quirurgicos"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Descripción del proceso: {detalle["Descripción del proceso"]}')
+                                            print(f'Anestesia: {detalle["Anestesia"]}')
+                                            print(f'Fecha del procedimiento: {detalle["Fecha del procedimiento"]}')
+                                            print(f'Lugar del procedimiento: {detalle["Lugar del procedimiento"]}')
+                                        
+                                    case 5:
+                                        print(">>>REGISTRO DE ANTECEDENTES PERSONALES<<<")
+                                        
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"antecedentes"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Antecedentes patológicos: {detalle["Antecedentes patológicos"]}')
+                                            print(f'Antecedentes quirúrgicos: {detalle["Antecedentes quirúrgicos"]}')
+                                            print(f'Antecedentes alérgicos: {detalle["Antecedentes alérgicos"]}')
+                                            print(f'Antecedentes ginecológicos: {detalle["Antecedentes ginecológicos"]}')
+                                            print(f'Antecedentes obstreticos: {detalle["Antecedentes obstreticos"]}')
+                                            print(f'Antecedentes farmacológicos: {detalle["Antecedentes farmacológicos"]}')
+                                            print(f'Antecedentes familiares: {detalle["Antecedentes familiares"]}')
+                                        
+                                    case 6:
+                                        print(">>>REGISTRO DE PARTOS<<<")
+                                        
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"partos"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Fecha del parto: {detalle["Fecha del parto"]}')
+                                            print(f'Hora del parto: {detalle["Hora del parto"]}')
+                                            print(f'Frecuencia Cardiaca de la madre: {detalle["Frecuencia Cardiaca de la madre"]}')
+                                            print(f'Tensión arterial de la madre: {detalle["Tensión arterial de la madre"]}')
+                                            print(f'Temperatura corporal de la madre: {detalle["Temperatura corporal de la madre"]}')
+                                            print(f'Frecuencia respiratoria de la madre: {detalle["Frecuencia respiratoria de la madre"]}')
+                                            print(f'Glucemia de la madre: {detalle["Glucemia de la madre"]}')
+                                            print(f'Apariencia general de la madre: {detalle["Apariencia general de la madre"]}')
+                                            print(f'Tamaño del feto: {detalle["Tamaño del feto"]}')
+                                            print(f'Numero de fetos: {detalle["Numero de fetos"]}')
+                                            print(f'Fetocardia: {detalle["Fetocardia"]}')
+                                        
+                                        
+                                    case 7:
+                                        print(">>>REGISTRO DE PRESCRIPCION MEDICA<<<")
+                                        
+                                        cursor=pac.find({"Nro Documento":idUsu,"Categoria":"prescripcion"}) 
+                                        
+                                        #print("..........",cursor)
+                                        
+                                        for detalle in cursor:
+                                            
+                                            print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                            print(f'Categoria: {detalle["Categoria"]}')
+                                            print(f'Fecha de la orden médica: {detalle["Fecha de la orden médica"]}')
+                                            print(f'Servicio asociado: {detalle["Servicio asociado"]}')
+                                            print(f'Diagnóstico parcial: {detalle["Diagnóstico parcial"]}')
+                                            print(f'Nombre del medicamento: {detalle["Nombre del medicamento"]}')
+                                            print(f'Dosis del medicamento: {detalle["Dosis del medicamento"]}')
+                                            print(f'Vía aplicación: {detalle["Vía aplicación"]}')
+                                            print(f'Tiempo de uso: {detalle["Tiempo de uso"]}')
                                         
                             else:
                                 print("Este número de documento no es válido")                      
