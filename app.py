@@ -227,42 +227,50 @@ Seleccione una opción: """))
                                 pac.insert_one(data)
                                     
                             case 2:
-                                id=int(input("Digite el numero de documento: "))
-                                
-                                cursor=pac.find({"Nro Documento":id},{'Nombre':1,'Apellidos':1,'Sexo':1,'RH':1,'Correo':1,'Telefono':1,'Fecha de Nacimiento':1,'Tipo Población':1,'Ocupación':1,'EPS':1,'Regimen':1})
-                            
-                                # print("..........",cursor)
-                                
-                                for detalle in cursor:
-                                    
-                                    print(f'Nombre: {detalle["Nombre"]}')
-                                    print(f'Apellidos: {detalle["Apellidos"]}')
-                                    print(f'Genero: {detalle["Sexo"]}')
-                                    print(f'RH: {detalle["RH"]}')
-                                    print(f'Correo: {detalle["Correo"]}')
-                                    print(f'Telefono: {detalle["Telefono"]}')
-                                    print(f'Fecha de Nacimiento: {detalle["Fecha de Nacimiento"]}')
-                                    print(f'Tipo de Población: {detalle["Tipo Población"]}')
-                                    print(f'Ocupacion: {detalle["Ocupación"]}')
-                                    print(f'EPS: {detalle["EPS"]}')
-                                    print(f'Regimen: {detalle["Regimen"]}')
+                                    id=int(input("Digite el numero de documento: "))
 
-                                            
+                                    cursor=pac.find({"Nro Documento":id},{'Nombre':1,'Apellidos':1,'Sexo':1,'RH':1,'Correo':1,'Telefono':1,'Fecha de Nacimiento':1,'Tipo Población':1,'Ocupación':1,'EPS':1,'Regimen':1})
+                                    # print("..........",cursor)
+                                    
+                                    for detalle in cursor:
+                                        
+                                        print(f'Nombre: {detalle["Nombre"]}')
+                                        print(f'Apellidos: {detalle["Apellidos"]}')
+                                        print(f'Genero: {detalle["Sexo"]}')
+                                        print(f'RH: {detalle["RH"]}')
+                                        print(f'Correo: {detalle["Correo"]}')
+                                        print(f'Telefono: {detalle["Telefono"]}')
+                                        print(f'Fecha de Nacimiento: {detalle["Fecha de Nacimiento"]}')
+                                        print(f'Tipo de Población: {detalle["Tipo Población"]}')
+                                        print(f'Ocupacion: {detalle["Ocupación"]}')
+                                        print(f'EPS: {detalle["EPS"]}')
+                                        print(f'Regimen: {detalle["Regimen"]}')
+                                        
                             case 3:  
                                 
                                 consultarpacientes=pac.find({},{"Nombre":1,"Apellidos":1,"Tipo Documento":1,"Nro Documento":1,"Sexo":1})
                                 for doc in consultarpacientes:
-                                    print(f'Nombre:{doc["Nombre"]}, Tipo de documento: {doc["Tipo Documento"]},Nro de documento:{doc["Nro Documento"]}')
+                                    print(f'Nombre:{doc["Nombre"]} {doc["Apellidos"]}, Genero:{doc["Sexo"]}, Tipo de documento:{doc["Tipo Documento"]}, Nro de documento:{doc["Nro Documento"]}')
                                     #pprint.pp(doc["Apellidos"])
                                     # pprint.pp(doc["Nro Documento"])
                             case 4:
                                 selpac=0
                                 while selpac!=5:
                                     print(f'{enter}Editar datos de paciente{enter}')
-                                    print("1. Editar correo")
-                                    print("2. Editar número de telefono")
-                                    print("3. Editar ocupación")
-                                    print("4. Editar tipo de régimen")
+                                    id=int(input("Digite el numero de documento del paciente: "))
+                                    verificacion=pac.find_one({"Nro Documento":id})
+                                    if verificacion:
+                                        print("1. Editar correo")
+                                        print("2. Editar número de telefono")
+                                        print("3. Editar ocupación")
+                                        print("4. Editar tipo de régimen")
+                                        print("5. Salir")
+                                        selpac=int(input("Seleccione una opción: "))
+                                    else: 
+                                        print(f"El número de documento ingresado, no se encuentra en la base de datos")
+                                        break
+                                            
+
                                     match selpac:
                                         case 1:
                                             nuevocorreo=input("Digite el nuevo correo: ")
@@ -272,20 +280,20 @@ Seleccione una opción: """))
                                             nuevonumero=int(input("Digite el número de telefono actualizado: "))
                                         case 3:
                                             nuevaocp=input("Digite la ocupación actualizada: ")
-                                        case 4: 
-                                            selreg1=0
-                                            while selreg1!=1:
-                                                nuevoreg=int(input("""Seleccione el tipo de regimen actualizado para el paciente:
-        1) Contributivo
-        2) Subsidiado"""))
-                                                if nuevoreg==1 or nuevoreg==2:
-                                                    selreg1=1
-                                                    if nuevoreg==1:
-                                                        regm="Contributivo"
-                                                    else:
-                                                        regm="Subsidiado"
-                                                else: 
-                                                    print("Digite una opción valida")
+        #                                 case 4: 
+        #                                     selreg1=0
+        #                                     while selreg1!=1:
+        #                                         nuevoreg=int(input("""Seleccione el tipo de regimen actualizado para el paciente:
+        # 1) Contributivo
+        # 2) Subsidiado"""))
+        #                                         if nuevoreg==1 or nuevoreg==2:
+        #                                             selreg1=1
+        #                                             if nuevoreg==1:
+        #                                                 regm="Contributivo"
+        #                                             else:
+        #                                                 regm="Subsidiado"
+        #                                         else: 
+        #                                             print("Digite una opción valida")
                     except ValueError:
                         print("Digite una opción válida")
                                     
