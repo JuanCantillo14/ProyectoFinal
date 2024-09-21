@@ -257,8 +257,8 @@ Seleccione una opción: """))
                                 selpac=0
                                 while selpac!=5:
                                     print(f'{enter}Editar datos de paciente{enter}')
-                                    id=int(input("Digite el numero de documento del paciente: "))
-                                    verificacion=pac.find_one({"Nro Documento":id})
+                                    idAct=int(input("Digite el numero de documento del paciente: "))
+                                    verificacion=pac.find_one({"Nro Documento":idAct})
                                     if verificacion:
                                         print("1. Editar correo")
                                         print("2. Editar número de telefono")
@@ -266,34 +266,63 @@ Seleccione una opción: """))
                                         print("4. Editar tipo de régimen")
                                         print("5. Salir")
                                         selpac=int(input("Seleccione una opción: "))
+                                        match selpac:
+                                            case 1:
+                                                nvc=0
+                                                while nvc!=1:
+                                                    nuevocorreo=input("Digite el nuevo correo: ")
+                                                    if "@" in nuevocorreo:
+                                                        nvc=1
+                                                        actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Correo":nuevocorreo}})
+                                                        print("Correo actualizado correctamente")
+                                                    else: 
+                                                        print("Digite un correo válido")
+                                        
+                                            case 2:
+                                                nvn=0
+                                                while nvn!=1:
+                                                    try:
+                                                        nuevonumero=int(input("Digite el número de telefono actualizado: "))
+                                                        if len(str(nuevonumero))==10:
+                                                            nvn=1
+                                                            actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Telefono":nuevonumero}})
+                                                            print("Telefono actualizado correctamente")
+                                                        else: 
+                                                            print("Digite un telefono válido")
+                                                    except ValueError:
+                                                        print("Digite un telefono válido")
+                                                    
+                                            case 3:
+                                                nuevaocp=input("Digite la ocupación actualizada: ")
+                                                actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Ocupación":nuevaocp}})
+                                                print("Ocupación actualizada correctamente")
+                                            case 4: 
+                                                selreg1=0
+                                                while selreg1!=1:
+                                                    try: 
+                                                        nuevoreg=int(input("""Seleccione el tipo de regimen actualizado para el paciente:
+    1) Contributivo
+    2) Subsidiado 
+Seleccione una opción: """))
+                                                        if nuevoreg==1 or nuevoreg==2:
+                                                            selreg1=1
+                                                            if nuevoreg==1:
+                                                                regm="Contributivo"
+                                                                actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Regimen":regm}})
+                                                                print("Regimen actualizada correctamente")
+                                                            else:
+                                                                regm="Subsidiado"
+                                                                actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Regimen":regm}})
+                                                                print("Regimen actualizada correctamente")
+                                                        else: 
+                                                            print("Digite una opción valida")
+                                                    except ValueError:
+                                                        print("Digite una opçión válida")
+                                        break
                                     else: 
                                         print(f"El número de documento ingresado, no se encuentra en la base de datos")
                                         break
                                             
-
-                                    match selpac:
-                                        case 1:
-                                            nuevocorreo=input("Digite el nuevo correo: ")
-                                            nvcorreo={"$set":{"Correo":nuevocorreo}}
-                                            pac.update_one()
-                                        case 2:
-                                            nuevonumero=int(input("Digite el número de telefono actualizado: "))
-                                        case 3:
-                                            nuevaocp=input("Digite la ocupación actualizada: ")
-        #                                 case 4: 
-        #                                     selreg1=0
-        #                                     while selreg1!=1:
-        #                                         nuevoreg=int(input("""Seleccione el tipo de regimen actualizado para el paciente:
-        # 1) Contributivo
-        # 2) Subsidiado"""))
-        #                                         if nuevoreg==1 or nuevoreg==2:
-        #                                             selreg1=1
-        #                                             if nuevoreg==1:
-        #                                                 regm="Contributivo"
-        #                                             else:
-        #                                                 regm="Subsidiado"
-        #                                         else: 
-        #                                             print("Digite una opción valida")
                     except ValueError:
                         print("Digite una opción válida")
                                     
