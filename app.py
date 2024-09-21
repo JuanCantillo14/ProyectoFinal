@@ -2,8 +2,7 @@ from paciente import*
 from simple_colors import *
 import json
 import pprint
-from conexion import *
-
+from conexion import * 
 
 
 enter="-"*10
@@ -17,11 +16,13 @@ selpob=0
 selreg=0
 selh=0
 selh2=0
-while sel!=3:
+selh3=0
+while sel!=4:
     print(f""">>>BIEVENIDO<<<""")
-    print("1.Pacientes")
-    print("2.Historia Clinica")
-    print("3.Salir")
+    print("1. Pacientes")
+    print("2. Historias Clinicas")
+    print("3. Talento Humano")
+    print("4.Salir")
     print(f'{enter}Seleccione una opción{enter}')
     sel=int(input())
     match sel:
@@ -60,7 +61,8 @@ while sel!=3:
                             else:
                                 print("Digite nuevamente su genero")
                         while selrh!=1:
-                            r=int(input("""1) A+
+                            r=int(input("""Tipo de sangre del paciente
+1) A+
 2) A-
 3) B+
 4) B-
@@ -89,9 +91,15 @@ Seleccione una opción: """))
                                     rhs="O-"
                             else:
                                 print("Digite una opción válida")
-                        
-                        email=input("Ingrese correo del paciente: ")
-                        
+                        selemail=0
+                        while selemail!=1:
+                            email=input("Ingrese correo del paciente: ")
+                            if "@" in email:
+                                selemail=1
+                                email=email    
+                            else:
+                                print("Digite un correo válido")     
+
                         while seltel!=1:
                             tele=int(input("Ingrese telefono del paciente: "))
             
@@ -99,25 +107,37 @@ Seleccione una opción: """))
                                 seltel=1
                                 tel=tele
                             else:
-                                print("Digite un telefono válido ")
+                                print("Digite un telefono válido")
                         
                         while seltd!=1:
-                            td=int(input("""1) Cedula de Ciudadania
+                            try:
+                                td=int(input("""1) Cedula de Ciudadania
 2) Cedula de Extranjería
 3) Tarjeta de Identidad
 4) Pasaporte
 Seleccione una opción: """))
-                            if td==1 or td==2 or td==3 or td==4:
-                                seltd=1
-                                if td==1: 
-                                    tipdoc="Cedula de Ciudadania"
-                                elif td==2: 
-                                    tipdoc="Cedula de Extranjeria"     
-                                elif td==3: 
-                                    tipdoc="Tarjeta de Identidad"         
+                                if td==1 or td==2 or td==3 or td==4:
+                                    seltd=1
+                                    if td==1: 
+                                        tipdoc="Cedula de Ciudadania"
+                                    elif td==2: 
+                                        tipdoc="Cedula de Extranjeria"     
+                                    elif td==3: 
+                                        tipdoc="Tarjeta de Identidad"         
+                                    else:
+                                        tipdoc="Pasaporte"  
                                 else:
-                                    tipdoc="Pasaporte"       
-                        nrodoc=int(input("Digite el número de documento: "))        
+                                    print("Digite una opción válida")    
+                            except ValueError:
+                                print("Digite una opción válida")
+                        selnrodoc=0 
+                        while selnrodoc!=1:
+                            nrodoc=int(input("Digite el número de documento: "))  
+                            if len(str(nrodoc))>3 and len(str(nrodoc))<11:
+                                selnrodoc=1
+                                nrodoc=nrodoc
+                            else:
+                                print("Digite un número de documento válido")
                         nac=input("Digite la fecha de nacimiento en formato dd/mm/aaaa: ")    
                         while selpob!=1:
                             tp=int(input("""1) Etnias
@@ -178,20 +198,17 @@ Seleccione una opción: """))
                         with open ("pacientes.json","w") as p:
                             json.dump(x,p)
                             
-                            
                         with open ("pacientes.json") as f:
                             data=json.load(f)
                             
                             
                         pac.insert_one(data)
                             
-                        
-                            
                     case 2:
                         id=int(input("Digite el numero de documento: "))
                         
                         cursor=pac.find({"Nro Documento":id},{'Nombre':1,'Apellidos':1,'Sexo':1,'RH':1,'Correo':1,'Telefono':1,'Fecha de Nacimiento':1,'Tipo Población':1,'Ocupación':1,'EPS':1,'Regimen':1})
-                        
+                    
                         # print("..........",cursor)
                         
                         for detalle in cursor:
@@ -207,12 +224,13 @@ Seleccione una opción: """))
                             print(f'Ocupacion: {detalle["Ocupación"]}')
                             print(f'EPS: {detalle["EPS"]}')
                             print(f'Regimen: {detalle["Regimen"]}')
-                            
+
+                                    
                     case 3:  
                         
                         consultarpacientes=pac.find({},{"Nombre":1,"Nro Documento":1,"Sexo":1})
                         for doc in consultarpacientes:
-                            pprint.pp(doc)
+                            pprint.pp(doc["Nombre"])
                     case 4:
                         selpac=0
                         while selpac!=5:
@@ -224,16 +242,27 @@ Seleccione una opción: """))
                             match selpac:
                                 case 1:
                                     nuevocorreo=input("Digite el nuevo correo: ")
+                                    nvcorreo={"$set":{"Correo":nuevocorreo}}
+                                    pac.update_one()
                                 case 2:
                                     nuevonumero=int(input("Digite el número de telefono actualizado: "))
                                 case 3:
                                     nuevaocp=input("Digite la ocupación actualizada: ")
                                 case 4: 
                                     selreg1=0
-                                    while selreg1!=3:
-                                        match selreg1:
-                                            case 1:
-                                                pass
+                                    while selreg1!=1:
+                                        nuevoreg=int(input("""Seleccione el tipo de regimen actualizado para el paciente:
+1) Contributivo
+2) Subsidiado"""))
+                                        if nuevoreg==1 or nuevoreg==2:
+                                            selreg1=1
+                                            if nuevoreg==1:
+                                                regm="Contributivo"
+                                            else:
+                                                regm="Subsidiado"
+                                        else: 
+                                            print("Digite una opción valida")
+                                
         case 2:
             while selh!=3:
                 selh2=0
@@ -247,7 +276,7 @@ Seleccione una opción: """))
                     case 1:
                         while selh2!=8:
                             
-                            idDoc=input("Digite su numero de documento: ")
+                            idDoc=input("Digite el número de documento del paciente: ")
                                 
                             with open('pacientes.json','r')as p:
                                 verificar=p.read()
@@ -401,3 +430,15 @@ Digite una opción: """))
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
+        case 3: 
+            while selh3!=3:
+                selh4=0
+                print(">>>MENÚ DE TALENTO HUMANO<<<")
+                print("1. ")
+                print("2.Consultar datos")
+                print("3.Salir")
+                print(f'{enter}Seleccione una opción{enter}')
+                selh4=int(input())
+                match selh4:
+                    case 1: 
+                        pass
