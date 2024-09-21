@@ -50,3 +50,11 @@ def mostrarEmpleado(especialidad):
     resultados=emp.find({"detalles empleado.especialidad":especialidad})
     especialidades=[x for x in resultados] 
     return especialidades
+
+def eliminarEmpleado (escogido):
+    D=emp.delete_one({"numero doc":escogido})
+    if D.deleted_count>0:
+        print("Empleado eliminado",D)
+    else :
+        print("Empleado no existente")
+        

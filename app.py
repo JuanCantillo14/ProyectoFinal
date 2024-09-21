@@ -440,9 +440,8 @@ Digite una opción: """))
                 print("1.Ver empleados")
                 print("2.Registrar nuevo empleado")
                 print("3.Actualizar datos de un empleado")
-                print("4.registrar datos de empleados")
-                print("5.Eliminar un empleado")
-                print("6.Salir")
+                print("4.Eliminar un empleado")
+                print("5.Salir")
                 print(f'{enter}Seleccione una opción{enter}')
                 selh4=int(input())
                 match selh4:
@@ -492,7 +491,7 @@ Digite una opción: """))
                         celular=int(input("Digite el numero de celular: "))
                         correo=input("Digite el correo electronico: ")
                         tipodoc=input("Digite el tipo de documento: ")
-                        numdoc=int(input("Digite el numero de documento: "))
+                        numdoc=input("Digite el numero de documento: ")
                         rh=input("Digite el RH: ")
                         ocupacion= input ("Digite el cargo que ocupara el empleado: ")
                         tipopb=input ("Digite el tipo depoblacion: ")
@@ -527,9 +526,10 @@ Digite una opción: """))
                         email=input("Digite el nuevo correo de el empleado")
                         direccion=input("Digite la nueva direccion de el empleado ")
                                 
-                    case 5:
+                    case 4:
                         print ("Eliminar empleado")
-                        nro_documento=input("Dijite el documento de el empleado ")
+                        escogido=input("Dijite el documento de el empleado ")
+                        x=eliminarEmpleado(escogido)
                     
                     
                     case _:

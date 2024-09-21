@@ -4,12 +4,12 @@ class Empleado (Persona):
         super().__init__(nombres, apellidos, genero, rh, correo, telefono, tipo_doc, nro_doc, fecha_nacimiento, tipo_poblacion,ocupacion)
         self.__especialidad=especialidad 
         self.__salario=salario 
-        self.nombre_empresa=nombre_empresa
-        self.fecha_inicial=fecha_inicial
-        self.fecha_final=fecha_final
-        self.titulo=titulo
-        self.Institucion=institucion
-        self.fecha_culminado=fecha_culminado
+        self.__nombre_empresa=nombre_empresa
+        self.__fecha_inicial=fecha_inicial
+        self.__fecha_final=fecha_final
+        self.__titulo=titulo
+        self.__Institucion=institucion
+        self.__fecha_culminado=fecha_culminado
         
     def getTitulo (self):
         return self.__titulo
@@ -18,7 +18,7 @@ class Empleado (Persona):
         self.__titulo=titulo
     
     def getInstitucion (self):
-        return self.__institucion
+        return self.__Institucion
     
     def setInstitucion (self,institucion):
         self.institucion=institucion
