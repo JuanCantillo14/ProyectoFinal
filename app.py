@@ -3,6 +3,7 @@ from simple_colors import *
 import json
 import pprint
 from conexion import * 
+from empleado import *
 
 
 enter="-"*10
@@ -437,62 +438,101 @@ Digite una opción: """))
                 selh4=0
                 print(">>>MENÚ DE TALENTO HUMANO<<<")
                 print("1.Ver empleados")
-                print("2.Consultar datos ")
-                print("3.Registrar nuevo empleado")
-                print("4.Actualizar datos de un empleado")
-                print("5.Registrar experiencia laboral")
-                print("6.Registrar estudios academicos")
-                print("7.Eliminar un empleado")
-                print("8.Salir")
+                print("2.Registrar nuevo empleado")
+                print("3.Actualizar datos de un empleado")
+                print("4.registrar datos de empleados")
+                print("5.Eliminar un empleado")
+                print("6.Salir")
                 print(f'{enter}Seleccione una opción{enter}')
                 selh4=int(input())
                 match selh4:
                     case 1: 
-                        print (">>>Lista de empleados<<<")
-                    
-                    
+                        print (">>>Lista de empleados<<<") 
+                        print("1. Ver odontologos")
+                        print("2.Ver cirujanos")
+                        print("3.Ver dermatologos")
+                        print("Volver")
+                        emple=int(input())
+                        match emple:
+                            case 1:
+                                especialidad="Odontologo"
+                                odontologos=mostrarEmpleado(especialidad)
+                                if odontologos:
+                                    print("Estos son los odontologos")
+                                    for x in odontologos :
+                                        print(x)
+                                else:
+                                    print("No se encontro ningun odontologo")
+                            case 2:
+                                especialidad="Cirujano"
+                                cirujano=mostrarEmpleado(especialidad)
+                                if cirujano :
+                                    print("Estos son los cirujanos registrados actualmente")
+                                    for x in cirujano :
+                                        print(x)
+                                else: 
+                                    print("No se encontro ningun cirujano ")
+                            
+                            case 3: 
+                                especialidad="Dermatologo"
+                                dermatologo=mostrarEmpleado(especialidad)
+                                if dermatologo :
+                                    print("Estos son los Dermatologos  registrados actualmente")
+                                    for x in dermatologo :
+                                        print(x)
+                                else: 
+                                    print("No se encontro ningun dermatologo ")
+                            case _:
+                                pass
+                        
                     case 2:
-                        print("Consultar datos de un empleado empleado Empleado ")
-                        nro_documento = input("Ingrese el documento del empleado")
+                        print ("Registro de un nuevo empleado: ")
+                        nombre=input ("Digite los nombres de el empleado: ")
+                        apellido=input("Digite los apellidos de el empleado: ")
+                        celular=int(input("Digite el numero de celular: "))
+                        correo=input("Digite el correo electronico: ")
+                        tipodoc=input("Digite el tipo de documento: ")
+                        numdoc=int(input("Digite el numero de documento: "))
+                        rh=input("Digite el RH: ")
+                        ocupacion= input ("Digite el cargo que ocupara el empleado: ")
+                        tipopb=input ("Digite el tipo depoblacion: ")
+                        fecha_nac=input("Digite la fecha de nacimiento  (dd/mm/aaaa): ")
+                        gener=input("Digite su genero")
+                        especial=input("Digite entre las siguientes opciones cual es su especialidad (Odontologo, Cirujano,Dermatologo): ")
+                        salario=int(input("Digite el salario de el empleado: "))
+                        nombrempre=input("Ingrese el nombre de la empresa")
+                        fechainicial=input("Ingrese la fecha inicial ")
+                        fechafinal=input("Ingrese la fecha final")
+                        titulo=input("Ingrese su titulo")
+                        intitucio=input("Ingrese la institucion")
+                        fechaculminado=input("Ingrese la fecha en la que culmino su carrera")
+                        
+        
+                        
+                        try:
+                            registro=Empleado(nombre,apellido,gener,rh,correo,celular,tipodoc,numdoc,fecha_nac,tipopb,ocupacion,especial,salario,nombrempre,fechainicial,fechafinal,titulo, intitucio,fechaculminado)
+                            registrarEmpleado(registro)
+                            print("registro exitoso")
+                            
+                        except Exception as i:
+                            print("error",i)
+                            
                         
                         
                     case 3:
-                        print ("Registro de un nuevo empleado")
-                        cargo= input ("Digite el cargo que ocuara el empleado")
-                        nombre=input ("Digite los nombres de el empleado")
-                        apellido=input("Digite los apellidos de el empleado ")
-                        fecha_ing=input("Digite la fecha de ingreso de el empleado")
-                        salario=input("Digite el salario de el empleado")
-                        
-                        
-                    case 4:
                         print ("Actualizar datos de un empleado")
                         especialidad= input ("Digite la nueva especialidad que ocupara el empleado")
                         celular=input("Digite el nuevo numero de contacto del empleado")
                         salario=input("Digite el nuevo salario de el empleado")
                         email=input("Digite el nuevo correo de el empleado")
                         direccion=input("Digite la nueva direccion de el empleado ")
-                        
-                        
+                                
                     case 5:
-                        print("Registrar experiencia laboral")
-                        nombre_empresa=input("Digite el nombre de la empresa")
-                        cargo=("Digite el cargo que ocupaba el empleado")
-                        fecha_inicial=input("Digite la fecha de inicio (dd/mm/aaaa)")
-                        fecha_final=input("Digite la fecha final (dd/mm/aaaa)")
-                    
-                    case 6:
-                        print("Registrar estudios academicos")
-                        titulo=input("Digite el titulo academico ")
-                        institucion=input("Digite la institucion")   
-                        fecha_culminado=input("Digite la fecha de culminacion (dd/mm/aaaa)")
-                        
-                    case 7:
                         print ("Eliminar empleado")
                         nro_documento=input("Dijite el documento de el empleado ")
                     
                     
-                    case 8:
+                    case _:
                         print("Cerrando menu")
                         selh3 = 3  
                         
