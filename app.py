@@ -31,7 +31,6 @@ while sel!=4:
             
             case 1:
                 while sel2!=5:
-                    sel=4
                     try:
                         print(">>>BIEVENIDO<<<")
                         print("1.Registrar paciente")
@@ -121,7 +120,8 @@ Seleccione una opción: """))
                                 
                                 while seltd!=1:
                                     try:
-                                        td=int(input("""1) Cedula de Ciudadania
+                                        td=int(input("""Tipo de documento
+    1) Cedula de Ciudadania
     2) Cedula de Extranjería
     3) Tarjeta de Identidad
     4) Pasaporte
@@ -576,6 +576,7 @@ Digite una opción: """))
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
+                                    break
                         case 2:
                             while selh2!=8:
                                 
@@ -622,6 +623,8 @@ Digite una opción: """))
                                                 print(f'Via de aplicacion: {detalle["Via de aplicacion"]}')
                                                 print(f'Eventos adversos: {detalle["Eventos adversos"]}')
                                                 print(f'Intervalo: {detalle["Intervalo"]}')
+                                            
+                                            break
                                                 
                                                 
                                         case 2:
@@ -643,6 +646,7 @@ Digite una opción: """))
                                                 print(f'Frecuencia respiratoria: {detalle["Frecuencia respiratoria"]}')
                                                 print(f'Presión arterial: {detalle["Presión arterial"]}')
                                                 
+                                            break
                                             
                                         case 3:
                                             print(">>>REGISTRO DATOS DE CONSULTA<<<")
@@ -664,7 +668,7 @@ Digite una opción: """))
                                                 print(f'Parentesco del acompañante: {detalle["Parentesco del acompañante"]}')
                                                 print(f'Conclusiones: {detalle["Conclusiones"]}')
                                                 
-                                        
+                                            break
                                         case 4:
                                             print(">>>REGISTRO DE PROCESOS QUIRURGICOS<<<")
                                             
@@ -680,7 +684,7 @@ Digite una opción: """))
                                                 print(f'Anestesia: {detalle["Anestesia"]}')
                                                 print(f'Fecha del procedimiento: {detalle["Fecha del procedimiento"]}')
                                                 print(f'Lugar del procedimiento: {detalle["Lugar del procedimiento"]}')
-                                            
+                                            break
                                         case 5:
                                             print(">>>REGISTRO DE ANTECEDENTES PERSONALES<<<")
                                             
@@ -699,7 +703,7 @@ Digite una opción: """))
                                                 print(f'Antecedentes obstreticos: {detalle["Antecedentes obstreticos"]}')
                                                 print(f'Antecedentes farmacológicos: {detalle["Antecedentes farmacológicos"]}')
                                                 print(f'Antecedentes familiares: {detalle["Antecedentes familiares"]}')
-                                            
+                                            break
                                         case 6:
                                             print(">>>REGISTRO DE PARTOS<<<")
                                             
@@ -722,7 +726,7 @@ Digite una opción: """))
                                                 print(f'Tamaño del feto: {detalle["Tamaño del feto"]}')
                                                 print(f'Numero de fetos: {detalle["Numero de fetos"]}')
                                                 print(f'Fetocardia: {detalle["Fetocardia"]}')
-                                            
+                                            break
                                             
                                         case 7:
                                             print(">>>REGISTRO DE PRESCRIPCION MEDICA<<<")
@@ -742,10 +746,11 @@ Digite una opción: """))
                                                 print(f'Dosis del medicamento: {detalle["Dosis del medicamento"]}')
                                                 print(f'Vía aplicación: {detalle["Vía aplicación"]}')
                                                 print(f'Tiempo de uso: {detalle["Tiempo de uso"]}')
-                                            
+                                            break
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
+                                    break
             case 3: 
                 while selh3!=3:
                     selh4=0
