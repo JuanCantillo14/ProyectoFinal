@@ -378,7 +378,7 @@ Seleccione una opción: """))
     1) Intradermica
     2) Subcutanea
     3) Intramuscular
-    Digite una opción: """))
+Digite una opción: """))
                                                 
                                                 if viaAp==1 or viaAp==2 or viaAp==3:
                                                     selviAp=1
@@ -576,15 +576,184 @@ Seleccione una opción: """))
                                 else:
                                     print("Este número de documento no es válido")                      
                                     selh2=7
+                        case 2:
+                            while selh2!=8:
+                                
+                                idUsu=int(input("Digite su numero de documento: "))
+                                
+                                
+                                
+                                    
+                                verificacion=pac.find_one({"Nro Documento":idUsu})
+                                
+                                #print(f"Resultado de la búsqueda: {verificacion}") #Esto es pa ver lo que bota el cursor (no activar, era prueba)
+                                    
+                                    
+                                if verificacion:
+                                    print(">>>MENÚ DE DATOS<<<")
+                                    print("1. Consultar Vacunas")
+                                    print("2. Consultar Datos antropometricos")
+                                    print("3. Consultas")
+                                    print("4. Consultar Procemiento quirurgicos")
+                                    print("5. Consultar Antecedentes personales")
+                                    print("6. Consultar Prescripccion Medica")
+                                    print("7. Consultar Partos")
+                                    print("8. Volver al menú anterior")
+                                    print(f'{enter}Seleccione una opción{enter}')
+                                    selh2=int(input())
+                                        
+                                    match selh2:
+                                        case 1:
+                                            print(">>>MENU DE VACUNACION<<<")
+                                                                    
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"Vacunas"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Descripcion: {detalle["Descripcion"]}')
+                                                print(f'Dosis: {detalle["Dosis"]}')
+                                                print(f'Nro Vacunas: {detalle["Nro Vacunas"]}')
+                                                print(f'Fecha de la Vacuna: {detalle["Fecha de la Vacuna"]}')
+                                                print(f'Refuerzos: {detalle["Refuerzos"]}')
+                                                print(f'Via de aplicacion: {detalle["Via de aplicacion"]}')
+                                                print(f'Eventos adversos: {detalle["Eventos adversos"]}')
+                                                print(f'Intervalo: {detalle["Intervalo"]}')
+                                                
+                                                
+                                        case 2:
+                                            print(">>>REGISTRO DATOS ANTROPOMETRICOS<<<")
+                                            
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"antropometricos"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Estatura: {detalle["Estatura"]}')
+                                                print(f'Temperatura: {detalle["Temperatura"]}')
+                                                print(f'Peso: {detalle["Peso"]}')
+                                                print(f'IMC: {detalle["IMC"]}')
+                                                print(f'Pulso: {detalle["Pulso"]}')
+                                                print(f'Frecuencia respiratoria: {detalle["Frecuencia respiratoria"]}')
+                                                print(f'Presión arterial: {detalle["Presión arterial"]}')
+                                                
+                                            
+                                        case 3:
+                                            print(">>>REGISTRO DATOS DE CONSULTA<<<")
+                                            
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"consulta"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Descripción: {detalle["Descripción"]}')
+                                                print(f'Motivo de consulta: {detalle["Motivo de consulta"]}')
+                                                print(f'Diagnostico: {detalle["Diagnostico"]}')
+                                                print(f'Plan de terapia: {detalle["Plan de terapia"]}')
+                                                print(f'Epicrisis: {detalle["Epicrisis"]}')
+                                                print(f'Nombre del acompañante: {detalle["Nombre del acompañante"]}')
+                                                print(f'Parentesco del acompañante: {detalle["Parentesco del acompañante"]}')
+                                                print(f'Conclusiones: {detalle["Conclusiones"]}')
+                                                
+                                        
+                                        case 4:
+                                            print(">>>REGISTRO DE PROCESOS QUIRURGICOS<<<")
+                                            
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"quirurgicos"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Descripción del proceso: {detalle["Descripción del proceso"]}')
+                                                print(f'Anestesia: {detalle["Anestesia"]}')
+                                                print(f'Fecha del procedimiento: {detalle["Fecha del procedimiento"]}')
+                                                print(f'Lugar del procedimiento: {detalle["Lugar del procedimiento"]}')
+                                            
+                                        case 5:
+                                            print(">>>REGISTRO DE ANTECEDENTES PERSONALES<<<")
+                                            
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"antecedentes"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Antecedentes patológicos: {detalle["Antecedentes patológicos"]}')
+                                                print(f'Antecedentes quirúrgicos: {detalle["Antecedentes quirúrgicos"]}')
+                                                print(f'Antecedentes alérgicos: {detalle["Antecedentes alérgicos"]}')
+                                                print(f'Antecedentes ginecológicos: {detalle["Antecedentes ginecológicos"]}')
+                                                print(f'Antecedentes obstreticos: {detalle["Antecedentes obstreticos"]}')
+                                                print(f'Antecedentes farmacológicos: {detalle["Antecedentes farmacológicos"]}')
+                                                print(f'Antecedentes familiares: {detalle["Antecedentes familiares"]}')
+                                            
+                                        case 6:
+                                            print(">>>REGISTRO DE PARTOS<<<")
+                                            
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"partos"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Fecha del parto: {detalle["Fecha del parto"]}')
+                                                print(f'Hora del parto: {detalle["Hora del parto"]}')
+                                                print(f'Frecuencia Cardiaca de la madre: {detalle["Frecuencia Cardiaca de la madre"]}')
+                                                print(f'Tensión arterial de la madre: {detalle["Tensión arterial de la madre"]}')
+                                                print(f'Temperatura corporal de la madre: {detalle["Temperatura corporal de la madre"]}')
+                                                print(f'Frecuencia respiratoria de la madre: {detalle["Frecuencia respiratoria de la madre"]}')
+                                                print(f'Glucemia de la madre: {detalle["Glucemia de la madre"]}')
+                                                print(f'Apariencia general de la madre: {detalle["Apariencia general de la madre"]}')
+                                                print(f'Tamaño del feto: {detalle["Tamaño del feto"]}')
+                                                print(f'Numero de fetos: {detalle["Numero de fetos"]}')
+                                                print(f'Fetocardia: {detalle["Fetocardia"]}')
+                                            
+                                            
+                                        case 7:
+                                            print(">>>REGISTRO DE PRESCRIPCION MEDICA<<<")
+                                            
+                                            cursor=pac.find({"Nro Documento":idUsu,"Categoria":"prescripcion"}) 
+                                            
+                                            #print("..........",cursor)
+                                            
+                                            for detalle in cursor:
+                                                
+                                                print(f'Nro Documento: {detalle["Nro Documento"]}')
+                                                print(f'Categoria: {detalle["Categoria"]}')
+                                                print(f'Fecha de la orden médica: {detalle["Fecha de la orden médica"]}')
+                                                print(f'Servicio asociado: {detalle["Servicio asociado"]}')
+                                                print(f'Diagnóstico parcial: {detalle["Diagnóstico parcial"]}')
+                                                print(f'Nombre del medicamento: {detalle["Nombre del medicamento"]}')
+                                                print(f'Dosis del medicamento: {detalle["Dosis del medicamento"]}')
+                                                print(f'Vía aplicación: {detalle["Vía aplicación"]}')
+                                                print(f'Tiempo de uso: {detalle["Tiempo de uso"]}')
+                                            
+                                else:
+                                    print("Este número de documento no es válido")                      
+                                    selh2=7
             case 3: 
                 while selh3!=3:
                     selh4=0
                     print(">>>MENÚ DE TALENTO HUMANO<<<")
                     print("1.Ver empleados")
                     print("2.Registrar nuevo empleado")
-                    print("3.Actualizar datos de un empleado")
-                    print("4.Eliminar un empleado")
-                    print("5.Salir")
+                    print("3.Eliminar un empleado")
+                    print("4.Salir")
                     print(f'{enter}Seleccione una opción{enter}')
                     selh4=int(input())
                     match selh4:
@@ -659,17 +828,7 @@ Seleccione una opción: """))
                             except Exception as i:
                                 print("error",i)
                                 
-                            
-                            
                         case 3:
-                            print ("Actualizar datos de un empleado")
-                            especialidad= input ("Digite la nueva especialidad que ocupara el empleado")
-                            celular=input("Digite el nuevo numero de contacto del empleado")
-                            salario=input("Digite el nuevo salario de el empleado")
-                            email=input("Digite el nuevo correo de el empleado")
-                            direccion=input("Digite la nueva direccion de el empleado ")
-                                    
-                        case 4:
                             print ("Eliminar empleado")
                             escogido=input("Dijite el documento de el empleado ")
                             x=eliminarEmpleado(escogido)
