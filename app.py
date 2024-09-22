@@ -280,8 +280,51 @@ Seleccione una opción: """))
                                                                 print("Correo actualizado correctamente")
                                                             else: 
                                                                 print("Digite un correo válido")
+                                                    case 2:
+                                                        nvn=0
+                                                        while nvn!=1:
+                                                            try:
+                                                                nuevonumero=int(input("Digite el número de telefono actualizado: "))
+                                                                if len(str(nuevonumero))==10:
+                                                                    nvn=1
+                                                                    actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Telefono":nuevonumero}})
+                                                                    print("Telefono actualizado correctamente")
+                                                                else: 
+                                                                    print("Digite un telefono válido")
+                                                            except ValueError:
+                                                                print("Digite un telefono válido")
+
+                                                    case 3:
+                                                        nuevaocp=input("Digite la ocupación actualizada: ")
+                                                        actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Ocupación":nuevaocp}})
+                                                        print("Ocupación actualizada correctamente")
+                                                    case 4: 
+                                                        selreg1=0
+                                                        while selreg1!=1:
+                                                            try: 
+                                                                nuevoreg=int(input("""Seleccione el tipo de regimen actualizado para el paciente:
+    1) Contributivo
+    2) Subsidiado 
+Seleccione una opción: """))
+                                                                if nuevoreg==1 or nuevoreg==2:
+                                                                    selreg1=1
+                                                                    if nuevoreg==1:
+                                                                        regm="Contributivo"
+                                                                        actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Regimen":regm}})
+                                                                        print("Regimen actualizada correctamente")
+                                                                    else:
+                                                                        regm="Subsidiado"
+                                                                        actualizar=pac.update_one({"Nro Documento":idAct},{"$set":{"Regimen":regm}})
+                                                                        print("Regimen actualizada correctamente")
+                                                                else: 
+                                                                    print("Digite una opción valida")
+                                                            except ValueError: 
+                                                                print("Digite una opción válida")
+
                                             except ValueError:
                                                 print("Digite una opción válida")
+                                        else: 
+                                            print("Documento no válido")
                                     except ValueError:
                                         print("Digite un documento válida") 
                     except ValueError:
